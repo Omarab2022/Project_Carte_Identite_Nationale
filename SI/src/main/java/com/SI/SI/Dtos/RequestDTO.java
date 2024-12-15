@@ -17,7 +17,7 @@ public class RequestDTO {
     private Long id;
     private RequestType type;
     private RequestStatus status;
-    private PersonType personType; // New field
+    private PersonType personType;
     private LocalDateTime dateCreated;
     private LocalDateTime dateUpdated;
     private String numeroPreDemande;

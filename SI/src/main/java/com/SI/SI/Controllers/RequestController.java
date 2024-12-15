@@ -28,7 +28,7 @@ public class RequestController {
 
     @PostMapping
     public ResponseEntity<?> createRequest(@RequestBody RequestDTO requestDTO) {
-        // Validate based on person type
+
         if (requestDTO.getPersonType() == PersonType.MAROCAIN) {
             PersonalInformationDTO pi = requestDTO.getPersonalInformation();
             if (pi.getReferenceArreteNationalite() != null || pi.getDateArreteNationalite() != null) {
@@ -100,7 +100,6 @@ public class RequestController {
         return ResponseEntity.ok(request);
     }
 
-    // Utility method to check authentication
     private boolean isAuthenticated(String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return false;
@@ -124,7 +123,7 @@ public class RequestController {
             @RequestBody RequestDTO requestDTO
     ) {
         try {
-            // Validate based on person type
+
             if (requestDTO.getPersonType() == PersonType.MAROCAIN) {
                 PersonalInformationDTO pi = requestDTO.getPersonalInformation();
                 if (pi.getReferenceArreteNationalite() != null || pi.getDateArreteNationalite() != null) {

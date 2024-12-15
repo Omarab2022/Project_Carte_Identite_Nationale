@@ -1,6 +1,5 @@
 package com.SI.SI.Dtos;
 
-// src/main/java/com/yourapp/dto/RequestStatusUpdateDTO.java
 
 import com.SI.SI.Enums.RequestStatus;
 
@@ -10,7 +9,7 @@ public class RequestStatusUpdateDTO {
     private RequestStatus status;
     private LocalDate policeCenterDate;
 
-    // Getters and Setters
+
     public RequestStatus getStatus() {
         return status;
     }

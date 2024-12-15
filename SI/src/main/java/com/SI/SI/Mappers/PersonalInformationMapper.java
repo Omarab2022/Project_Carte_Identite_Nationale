@@ -8,7 +8,7 @@ import com.SI.SI.Entities.PersonalInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-// PersonalInformationMapper.java (Ensure bidirectional relationships are set)
+
 @Component
 public class PersonalInformationMapper {
 

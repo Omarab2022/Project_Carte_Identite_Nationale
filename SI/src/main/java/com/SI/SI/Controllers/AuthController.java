@@ -25,7 +25,7 @@ public class AuthController {
         }
     }
 
-    // DTOs for login
+
     @Data
     public static class LoginRequest {
         private String email;

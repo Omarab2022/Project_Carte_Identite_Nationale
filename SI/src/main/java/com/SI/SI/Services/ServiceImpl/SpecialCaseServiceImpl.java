@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
-// SpecialCaseServiceImpl.java
+
 @Service
 @RequiredArgsConstructor
 public class SpecialCaseServiceImpl implements SpecialCaseService {
@@ -34,7 +34,7 @@ public class SpecialCaseServiceImpl implements SpecialCaseService {
         specialCase.setRequest(request);
         request.setSpecialCase(specialCase);
 
-        requestRepository.save(request); // This saves both request and specialCase because of cascade
+        requestRepository.save(request);
         return specialCaseMapper.toDto(specialCase);
     }
 }

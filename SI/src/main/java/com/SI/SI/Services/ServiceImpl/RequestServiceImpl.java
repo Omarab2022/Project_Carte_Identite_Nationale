@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
@@ -28,9 +30,15 @@ public class RequestServiceImpl implements RequestService {
     private final RequestMapper requestMapper;
     private final EmailService emailService;
     private final Random random = new Random();
+    private static final Logger logger = LoggerFactory.getLogger(RequestServiceImpl.class);
+
 
     private String generateCnieNumber() {
         return String.format("CNIE%06d", random.nextInt(1000000));
+    }
+
+    private String generateNumeroPreDemande() {
+        return String.format("PRE%06d", random.nextInt(1000000));
     }
 
     @Override
@@ -39,9 +47,42 @@ public class RequestServiceImpl implements RequestService {
         request.setDateCreated(LocalDateTime.now());
         // Ensure CIN is null when creating
         request.setCnieNumber(null);
+
+        // Generate numeroPreDemande
+        String numeroPreDemande = generateNumeroPreDemande();
+        request.setNumeroPreDemande(numeroPreDemande);
+
         Request savedRequest = requestRepository.save(request);
+
+        // Send email notification about request creation
+        sendRequestCreationEmail(savedRequest);
+
         return requestMapper.toDto(savedRequest);
     }
+
+    private void sendRequestCreationEmail(Request request) {
+        String userEmail = request.getEmail();
+        if (userEmail == null || userEmail.isEmpty()) {
+            // Log warning if email is not available
+            logger.warn("No email address available for request: " + request.getId());
+            return;
+        }
+
+        String subject = "Votre demande a été créée avec succès";
+        String body = String.format(
+                "Bonjour %s,\n\n" +
+                        "Votre demande a été créée avec succès.\n" +
+                        "Votre numéro de pré-demande est: %s\n\n" +
+                        "Veuillez conserver ce numéro pour suivre l'état de votre demande.\n\n" +
+                        "Cordialement,\n" +
+                        "L'équipe de support",
+                request.getPersonalInformation().getPrenom(),
+                request.getNumeroPreDemande()
+        );
+
+        emailService.sendStatusUpdateEmail(userEmail, subject, body);
+    }
+
 
     public List<RequestDTO> getAllRequests() {
         return requestRepository.findAll().stream()
@@ -84,11 +125,9 @@ public class RequestServiceImpl implements RequestService {
         return requestMapper.toDto(updatedRequest);
     }
 
-    // Helper method to send status update email
     private void sendStatusUpdateEmail(Request updatedRequest) {
         String userEmail = updatedRequest.getEmail();
         if (userEmail == null || userEmail.isEmpty()) {
-            // Optionally, log or handle cases where email is not available
             return;
         }
 
@@ -129,21 +168,18 @@ public class RequestServiceImpl implements RequestService {
         Request existingRequest = requestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Request with id " + id + " not found"));
 
-        // Map the updated DTO to the existing entity while preserving certain fields
         Request updatedRequest = requestMapper.toEntity(requestDTO);
 
-        // Preserve fields that shouldn't be modified during update
         updatedRequest.setId(id);
         updatedRequest.setDateCreated(existingRequest.getDateCreated());
         updatedRequest.setDateUpdated(LocalDateTime.now());
-        updatedRequest.setStatus(existingRequest.getStatus()); // Preserve status - it should only be modified through updateRequestStatus
-        updatedRequest.setCnieNumber(existingRequest.getCnieNumber()); // Preserve CNIE number
-        updatedRequest.setNumeroPreDemande(existingRequest.getNumeroPreDemande()); // Preserve pre-demand number
+        updatedRequest.setStatus(existingRequest.getStatus());
+        updatedRequest.setCnieNumber(existingRequest.getCnieNumber());
+        updatedRequest.setNumeroPreDemande(existingRequest.getNumeroPreDemande());
 
-        // Save the updated request
+
         Request savedRequest = requestRepository.save(updatedRequest);
 
-        // Map back to DTO and return
         return requestMapper.toDto(savedRequest);
     }
 }

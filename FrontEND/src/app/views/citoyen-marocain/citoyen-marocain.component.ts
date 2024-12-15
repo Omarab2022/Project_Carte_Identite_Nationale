@@ -72,6 +72,18 @@ export class CitoyenMarocainComponent implements OnInit {
         // Générer le PDF
         this.generateAndPrintPdf();
 
+        Swal.fire({
+          title: 'Envoi en cours...',
+          text: 'Veuillez patienter pendant l\'envoi de l\'email',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+          showConfirmButton: false,
+          didOpen: () => {
+            Swal.showLoading();
+          }
+        });
+
         // Soumettre le formulaire
         const formData = this.citoyenForm.value;
         const requestDTO: RequestDTO = this.createRequestDTO(formData);

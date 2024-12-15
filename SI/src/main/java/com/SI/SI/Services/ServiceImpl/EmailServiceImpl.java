@@ -19,7 +19,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendStatusUpdateEmail(String to, String subject, String body) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("your-verified-email@gmail.com"); // Explicitly set FROM address
+            message.setFrom("your-verified-email@gmail.com");
             message.setTo(to);
             message.setSubject(subject);
             message.setText(body);
@@ -28,7 +28,6 @@ public class EmailServiceImpl implements EmailService {
             logger.info("Email sent successfully to: " + to);
         } catch (MailException e) {
             logger.error("Failed to send email to: " + to, e);
-            // You might want to implement a retry mechanism or store failed emails
             throw new RuntimeException("Email sending failed", e);
         }
     }
