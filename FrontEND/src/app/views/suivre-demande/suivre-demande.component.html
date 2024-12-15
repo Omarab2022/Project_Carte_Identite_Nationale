@@ -1,0 +1,51 @@
+<body>
+    <div class="tracking-container">
+        <div class="tracking-image-section">
+            <div class="overlay"></div>
+            <div class="welcome-text">
+                <h1>Suivi de demande</h1>
+                <p>Consultez l'état d'avancement de votre carte d'identité</p>
+            </div>
+        </div>
+
+        <div class="tracking-form-section">
+            <div class="tracking-box">
+                <div class="brand">
+                    <div class="brand-circle">
+                        <img src="/assets/images/suivre.png" alt="Logo CNI">
+                    </div>
+                </div>
+
+                <div class="tracking-header">
+                    <h2>Suivre ma demande</h2>
+                    <p>Entrez votre numéro de pré-demande</p>
+                </div>
+
+                <form class="tracking-form" (ngSubmit)="onSubmit()" [formGroup]="trackingForm">
+                    <div class="form-group">
+                        <label for="predemande">Numéro de pré-demande</label>
+                        <div class="input-group">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="predemande" class="form-input"
+                                placeholder="Entrez votre numéro (e.g., PRE27382)" formControlName="numeroPreDemande"
+                                required pattern="^PRE\d+$">
+                        </div>
+                        <div *ngIf="submitted && f['numeroPreDemande'].errors" class="error">
+                            <small *ngIf="f['numeroPreDemande'].errors['required']">
+                                Le numéro est requis.
+                            </small>
+                            <small *ngIf="f['numeroPreDemande'].errors['pattern']">
+                                Le numéro doit commencer par "PRE" suivi uniquement de chiffres (ex. PRE27382).
+                            </small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="tracking-button" [disabled]="loading">
+                        <span *ngIf="!loading">Suivre ma demande</span>
+                        <span *ngIf="loading">Chargement...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,14 @@
+/* SIDENAV */
+
+mat-sidenav {
+  width: 250px;
+}
+
+main {
+  padding: 0px;
+}
+
+.mat-drawer-content {
+  display: inline !important;
+  overflow: hidden !important;
+}

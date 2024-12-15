@@ -1,0 +1,104 @@
+<div class="etat-demande-container" *ngIf="!loading && request">
+    <div class="card">
+        <div class="card-header">
+            <h2>État de votre demande</h2>
+            <p>Numéro de pré-demande: <strong>{{ request.numeroPreDemande }}</strong></p>
+        </div>
+        <div class="card-body">
+            <div class="status-section">
+                <h3>Status en direct: <span [ngClass]="getStatusClass(request.status)">{{ request.status }}</span></h3>
+
+                <!-- Section pour la date du centre de police -->
+                <div *ngIf="request.status === 'ALLER_CENTRE_POLICE' && request.policeCenterDate"
+                    class="police-center-date">
+                    <div class="police-center-date-icon">
+                        <img style="width: 45px;" src="../../../assets/images/police.png" alt="">
+                    </div>
+                    <div class="police-center-date-content">
+                        <span class="police-center-date-label">Rendez-vous au centre de police</span>
+                        <span class="police-center-date-value">{{ request.policeCenterDate | date:'longDate' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section pour le statut EN_ATTENTE -->
+            <div class="pending-section" *ngIf="request.status === 'EN_ATTENTE'">
+                <div class="pending-message">
+                    <h3>En Attente</h3>
+                    <p>Votre demande est en attente. Nous vous contacterons dès qu'elle sera traitée.</p>
+                </div>
+                <div class="pending-animation">
+                    <img src="../../../assets/images/enattente.png" alt="En Attente" />
+                </div>
+            </div>
+
+            <!-- Section pour le statut APPRUVE -->
+            <div class="approved-section" *ngIf="request.status === 'COMPLETEE'">
+                <div class="approved-message">
+                    <h3>Félicitations!</h3>
+                    <p>Voila votre carte est disponible chez votre quartier poste de police.</p>
+                </div>
+                <div class="approved-animation">
+                    <img src="../../../assets/images/carte.jpg" alt="Carte Disponible" />
+                </div>
+            </div>
+
+            <!-- Section pour le statut REJETER -->
+            <div class="rejected-section" *ngIf="request.status === 'REJETEE'">
+                <div class="rejected-message">
+                    <h3>Demande Rejetée</h3>
+                    <p>Votre demande a été rejetée. Veuillez contacter le support pour plus d'informations.</p>
+                </div>
+                <div class="rejected-animation">
+                    <img src="../../../assets/images/reject.png" alt="Demande Rejetée" />
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h4>Informations personnelles</h4>
+                <ul>
+                    <li><strong>Nom:</strong> {{ request.personalInformation.nom }}</li>
+                    <li><strong>Prénom:</strong> {{ request.personalInformation.prenom }}</li>
+                    <li><strong>Date de Naissance:</strong> {{ request.personalInformation.dateNaissanceJj }}/{{
+                        request.personalInformation.dateNaissanceMm }}/{{ request.personalInformation.dateNaissanceAaaa
+                        }}</li>
+                    <li><strong>Sexe:</strong> {{ request.personalInformation.sexe }}</li>
+                    <li><strong>Pays de Naissance:</strong> {{ request.personalInformation.paysNaissance }}</li>
+                    <li><strong>Province de Naissance:</strong> {{ request.personalInformation.provinceNaissance }}</li>
+                    <li><strong>Commune de Naissance:</strong> {{ request.personalInformation.communeNaissance }}</li>
+                    <li><strong>Nationalité Origine:</strong> {{ request.personalInformation.nationaliteOrigine }}</li>
+                    <li><strong>Profession:</strong> {{ request.personalInformation.profession }}</li>
+                    <li><strong>État Civil:</strong> {{ request.personalInformation.etatCivil }}</li>
+                    <li><strong>Adresse:</strong> {{ request.personalInformation.adresse }}</li>
+                    <!-- Ajoutez plus de champs si nécessaire -->
+                </ul>
+            </div>
+            <div class="additional-info-section" *ngIf="request.objetDemande || request.raisonAssistance">
+                <h4>Informations supplémentaires</h4>
+                <ul>
+                    <li *ngIf="request.objetDemande"><strong>Objet de la demande:</strong> {{ request.objetDemande }}
+                    </li>
+                    <li *ngIf="request.raisonAssistance"><strong>Raison de l'assistance:</strong> {{
+                        request.raisonAssistance }}</li>
+                </ul>
+            </div>
+            <!-- Section supplémentaire pour la Date du Centre de Police -->
+            <div class="additional-info-section"
+                *ngIf="request.status === 'ALLER_CENTRE_POLICE' && request.policeCenterDate">
+                <h4>Date pour aller au centre de police</h4>
+                <p>{{ request.policeCenterDate | date:'longDate' }}</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <p>Date de création: {{ request.dateCreated | date:'long' }}</p>
+            <p *ngIf="request.dateUpdated">Dernière mise à jour: {{ request.dateUpdated | date:'long' }}</p>
+        </div>
+    </div>
+</div>
+<div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Chargement des détails de la demande...</p>
+</div>
+<div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+</div>

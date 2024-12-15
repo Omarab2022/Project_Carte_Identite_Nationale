@@ -1,0 +1,26 @@
+<div class="faq-container">
+    <div class="faq-header">
+        <h1 class="faq-title">Carte Nationale d'Identité Électronique</h1>
+        <p class="faq-subtitle">Vos Questions, Nos Réponses</p>
+    </div>
+
+    <div class="faq-grid">
+        <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+            <div class="faq-question" (click)="toggleFaq(i)" [class.active]="faq.isOpen">
+                <div class="faq-icon">
+                    <!-- You would replace these with actual icons -->
+                    <span class="icon"></span>
+                </div>
+                <div class="faq-question-text">
+                    {{ faq.question }}
+                </div>
+                <div class="faq-toggle-icon">
+                    <i class="chevron" [class.rotated]="faq.isOpen">▼</i>
+                </div>
+            </div>
+            <div class="faq-answer" *ngIf="faq.isOpen">
+                <p>{{ faq.answer }}</p>
+            </div>
+        </div>
+    </div>
+</div>

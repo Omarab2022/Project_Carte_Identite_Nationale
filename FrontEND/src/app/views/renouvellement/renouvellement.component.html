@@ -1,0 +1,280 @@
+<div class="cnie-form-container" id="cnieForm">
+    <div class="cnie-form-header">
+        <h1><span *ngIf="personType === 'ETRANGER'"> ETRANGER : </span>
+            <span *ngIf="personType === 'MAROCAIN'"> MAROCAIN : </span>
+            Renouvelement de la CNIE
+        </h1>
+    </div>
+    <form class="cnie-form" [formGroup]="RenouvelementForm" (ngSubmit)="onSubmit()">
+        <div class="form-section">
+            <h2 class="section-title">Informations Personnelles</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="nom">Nom<span class="required">*</span></label>
+                    <input type="text" id="nom" formControlName="nom" required>
+                    <span class="arabic-label">الإسم العائلي</span>
+                </div>
+                <div class="form-field">
+                    <label for="prenom">Prénom<span class="required">*</span></label>
+                    <input type="text" id="prenom" formControlName="prenom" required>
+                    <span class="arabic-label">الإسم الشخصي</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="dateNaissanceJj">Date de naissance<span class="required">*</span></label>
+                    <div class="date-field">
+                        <input type="number" id="dateNaissanceJj" formControlName="dateNaissanceJj" min="1" max="31"
+                            placeholder="JJ" required>
+                        <input type="number" id="dateNaissanceMm" formControlName="dateNaissanceMm" min="1" max="12"
+                            placeholder="MM" required>
+                        <input type="number" id="dateNaissanceAaaa" formControlName="dateNaissanceAaaa"
+                            placeholder="AAAA" required>
+                    </div>
+                    <span class="date-note">Le jour et le mois sont obligatoires si vous en disposez.</span>
+                </div>
+                <div class="form-field">
+                    <label for="sexe">Sexe<span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" id="sexeFeminin" formControlName="sexe" value="FEMININ" required>
+                            Féminin
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="sexeMasculin" formControlName="sexe" value="MASCULIN" required>
+                            Masculin
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="paysNaissance">Pays de naissance<span class="required">*</span></label>
+                    <select id="paysNaissance" formControlName="paysNaissance" required>
+                        <option value="">Sélectionnez un pays</option>
+                        <option *ngFor="let country of countries" [value]="country">
+                            {{ country }}
+                        </option>
+                    </select>
+
+                </div>
+                <div class="form-field">
+                    <label for="provinceNaissance">Province ou ville de naissance<span class="required">*</span></label>
+                    <input type="text" id="provinceNaissance" formControlName="provinceNaissance" required>
+                    <span class="arabic-label">مكان الإزدياد</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="communeNaissance">Commune de naissance<span class="required">*</span></label>
+                    <input type="text" id="communeNaissance" formControlName="communeNaissance" required>
+                </div>
+                <div class="form-field">
+                    <label for="lieuNaissance">Lieu de naissance</label>
+                    <input type="text" id="lieuNaissance" formControlName="lieuNaissance">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="nationaliteOrigine">Nationalité d'origine<span class="required">*</span></label>
+                    <select id="nationaliteOrigine" formControlName="nationaliteOrigine" required>
+                        <option value="">Sélectionnez une nationalité</option>
+                        <option *ngFor="let nationality of nationalities" [value]="nationality">{{ nationality }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-row" *ngIf="personType === 'ETRANGER'">
+                    <div class="form-field">
+                        <label for="dateArretNationalite">Date d'arrêt de nationalité<span
+                                class="required">*</span></label>
+                        <div class="date-field">
+                            <input type="number" id="dateArretNationaliteJj" formControlName="dateArreteNationaliteJj"
+                                min="1" max="31" placeholder="JJ">
+                            <input type="number" id="dateArretNationaliteMm" formControlName="dateArreteNationaliteMm"
+                                min="1" max="12" placeholder="MM">
+                            <input type="number" id="dateArretNationaliteAaaa"
+                                formControlName="dateArreteNationaliteAaaa" placeholder="AAAA">
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="referenceArreteNationalite">Référence de l'arrêté de nationalité<span
+                                class="required">*</span></label>
+                        <input type="text" id="referenceArreteNationalite" formControlName="referenceArreteNationalite"
+                            required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="typeProfession">Type de profession<span class="required">*</span></label>
+                    <select id="typeProfession" formControlName="typeProfession" required>
+                        <option value="">Sélectionnez un type de profession</option>
+                        <option *ngFor="let professionType of professions" [value]="professionType">{{ professionType }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="profession">Profession<span class="required">*</span></label>
+                    <input type="text" id="profession" formControlName="profession" required>
+                    <span class="arabic-label">المهنة</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">État Civil</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="etatCivilNumero">Etat civil N°<span class="required">*</span></label>
+                    <input type="text" id="etatCivilNumero" formControlName="etatCivilNumero" required>
+                    <span class="arabic-label">بالعربية</span>
+                </div>
+                <div class="form-field">
+                    <label for="etatCivilAnnee">Année État Civil<span class="required">*</span></label>
+                    <input type="number" id="etatCivilAnnee" formControlName="etatCivilAnnee" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="situationFamille">Situation de famille<span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" id="situationCelibataire" formControlName="situationFamille"
+                                value="CELIBATAIRE" required>
+                            Célibataire
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="situationMarie" formControlName="situationFamille" value="MARIE"
+                                required>
+                            Marié(e)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="situationDivorce" formControlName="situationFamille" value="DIVORCE"
+                                required>
+                            Divorcé(e)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="situationVeuf" formControlName="situationFamille" value="VEUF"
+                                required>
+                            Veuf, Veuve
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">Lieu de Résidence</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="paysResidence">Pays de résidence<span class="required">*</span></label>
+                    <select id="paysResidence" name="paysResidence" required formControlName="paysResidence">
+                        <option value="">Sélectionnez un pays</option>
+                        <option value="Maroc">Maroc</option>
+                        <option value="France">France</option>
+                        <option value="Espagne">Espagne</option>
+                        <option value="États-Unis">États-Unis</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="provinceResidence">Province ou ville de résidence<span class="required">*</span></label>
+                    <input type="text" id="provinceResidence" name="provinceResidence" required
+                        formControlName="provinceResidence">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-row" *ngIf="personType === 'MAROCAIN'">
+                    <div class="form-field">
+                        <label for="communeResidence">Commune de résidence<span class="required">*</span></label>
+                        <input type="text" id="communeResidence" formControlName="communeResidence" required>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="adresse">Adresse<span class="required">*</span></label>
+                    <input type="text" id="adresse" name="adresse" required formControlName="adresse">
+                </div>
+            </div>
+        </div>
+        <div class="form-section">
+            <h2 class="section-title">Filiation</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomPere">Prénom du père<span class="required">*</span></label>
+                    <input type="text" id="prenomPere" formControlName="prenomPere" required>
+                    <span class="arabic-label">الإسم الشخصي للأب</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomPere">Nom du père</label>
+                    <input type="text" id="nomPere" formControlName="nomPere">
+                    <span class="arabic-label">الإسم العائلي للأب</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomMere">Prénom de la mère<span class="required">*</span></label>
+                    <input type="text" id="prenomMere" formControlName="prenomMere" required>
+                    <span class="arabic-label">الإسم الشخصي للأم</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomMere">Nom de la mère</label>
+                    <input type="text" id="nomMere" formControlName="nomMere">
+                    <span class="arabic-label">الإسم العائلي للأم</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomGrandPerePaternel">Prénom du grand père paternel<span
+                            class="required">*</span></label>
+                    <input type="text" id="prenomGrandPerePaternel" formControlName="prenomGrandPerePaternel" required>
+                    <span class="arabic-label">الإسم الشخصي للجد من الأب</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomGrandPerePaternel">Nom du grand père paternel</label>
+                    <input type="text" id="nomGrandPerePaternel" formControlName="nomGrandPerePaternel">
+                    <span class="arabic-label">الإسم العائلي للجد من الأب</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomGrandPereMaternel">Prénom du grand père maternel<span
+                            class="required">*</span></label>
+                    <input type="text" id="prenomGrandPereMaternel" formControlName="prenomGrandPereMaternel" required>
+                    <span class="arabic-label">الإسم الشخصي للجد من الأم</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomGrandPereMaternel">Nom du grand père maternel</label>
+                    <input type="text" id="nomGrandPereMaternel" formControlName="nomGrandPereMaternel">
+                    <span class="arabic-label">الإسم العائلي للجد من الأم</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">Informations Additionnelles</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" formControlName="email"
+                        placeholder="Pour être informé de la disponibilité de votre carte">
+                </div>
+                <div class="form-field">
+                    <label for="telephone">Téléphone</label>
+                    <input type="tel" id="telephone" formControlName="telephone"
+                        placeholder="Pour être informé de la disponibilité de votre carte">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="urgenceContact">Contacts en cas d'urgence</label>
+                    <input type="text" id="urgenceContact" formControlName="urgenceContact">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">SUIVANT</button>
+        </div>
+    </form>
+</div>

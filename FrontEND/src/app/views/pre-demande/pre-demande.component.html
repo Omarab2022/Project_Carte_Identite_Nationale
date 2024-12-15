@@ -1,0 +1,55 @@
+<!-- pre-demande-types.component.html -->
+<div class="pre-demande-container">
+    <h1 class="page-title">Type de Pré-demande</h1>
+
+    <div class="cards-container">
+        <!-- First Card -->
+        <div class="request-card">
+            <div class="icon-circle">
+                <img src="assets/images/carte.png" alt="Première Délivrance">
+            </div>
+            <h2 class="card-title">PREMIÈRE DÉLIVRANCE</h2>
+            <p class="card-description">
+                Pour toute nouvelle demande de délivrance d'une CNIE
+                <span class="emphasis-text">(Obligatoire à partir de 16 ans).</span>
+            </p>
+            <button class="select-button" (click)="openCitoyenPopup()">
+                SÉLECTIONNER
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Second Card -->
+        <div class="request-card">
+            <div class="icon-circle">
+                <img src="assets/images/new.webp" alt="Renouvellement">
+            </div>
+            <h2 class="card-title">RENOUVELLEMENT</h2>
+            <p class="card-description">
+                Pour toute demande de renouvellement d'une CNIE suite au changement d'une
+                ou de plusieurs données, ou en cas d'expiration ou de perte.
+            </p>
+            <button class="select-button" (click)="openRenouvellementPopup()">
+                SÉLECTIONNER
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Terms Agreement -->
+    <div class="terms-section">
+        <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            <span class="terms-text">
+                J'ai lu et j'accepte les <a href="#" class="terms-link">conditions générales</a> d'utilisation.
+            </span>
+        </label>
+    </div>
+
+    <!-- Notice Text -->
+    <div class="notice-text">
+        Ce traitement a été notifié et autorisé par la CNDP au titre du récépissé / de l'autorisation n° A - W -
+        569/2020 du 12/08/2020
+    </div>
+</div>

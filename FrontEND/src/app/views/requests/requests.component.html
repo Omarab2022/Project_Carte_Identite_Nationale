@@ -1,0 +1,64 @@
+<!-- src/app/components/requests/requests.component.html -->
+
+<div class="dashboard">
+    <div class="card">
+        <div class="card-content">
+            <div class="text-content">
+                <h3>Marocain Requests</h3>
+                <p>{{ marocainCount }}</p>
+            </div>
+            <div class="image-content">
+                <img src="../../../assets/images/marocicon.webp" alt="Marocain Requests" />
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-content">
+            <div class="text-content">
+                <h3>Etranger Requests</h3>
+                <p>{{ etrangerCount }}</p>
+            </div>
+            <div class="image-content">
+                <img src="../../../assets/images/flag.png" alt="Foreign Requests" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="requests-table">
+    <table>
+        <thead>
+            <tr>
+                <!-- Remplacer ID par Nom et Prénom -->
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Person Type</th>
+                <th>Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let request of requests">
+                <!-- Remplacer ID par Nom et Prénom -->
+                <td>{{ request.personalInformation.nom }}</td>
+                <td>{{ request.personalInformation.prenom }}</td>
+                <td>{{ request.type }}</td>
+                <td>
+                    <select [(ngModel)]="request.status" (change)="onStatusChange(request, request.status)">
+                        <option *ngFor="let status of RequestStatus | keyvalue" [value]="status.value">
+                            {{ status.value }}
+                        </option>
+                    </select>
+                </td>
+                <td>{{ request.personType }}</td>
+                <td>{{ request.numeroPreDemande }}</td>
+                <td>
+                    <!-- Ajoutez ici des boutons d'action si nécessaire -->
+                    <button (click)="viewRequest(request)">Voir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

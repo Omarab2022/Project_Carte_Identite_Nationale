@@ -1,0 +1,289 @@
+/* pre-demande-types.component.css */
+.pre-demande-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.page-title {
+    text-align: center;
+    color: #2E7D32;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 600;
+    position: relative;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #2E7D32, #4CAF50);
+    border-radius: 2px;
+}
+
+.cards-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.request-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.request-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(46, 125, 50, 0.15);
+}
+
+.icon-circle {
+    width: 120px;
+    height: 120px;
+    background: #2E7D32;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    /* Ensures the image stays within the circle */
+}
+
+.icon-circle img {
+    width: 60%;
+    /* Adjust as needed */
+    height: auto;
+}
+
+.request-card:hover .icon-circle {
+    transform: scale(1.1);
+    background: #1B5E20;
+}
+
+.card-title {
+    color: #2E7D32;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.card-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.emphasis-text {
+    display: block;
+    color: #2E7D32;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.select-button {
+    background: linear-gradient(135deg, #2E7D32, #4CAF50);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.select-button:hover {
+    background: linear-gradient(135deg, #1B5E20, #388E3C);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+}
+
+.select-button i {
+    transition: transform 0.3s ease;
+}
+
+.select-button:hover i {
+    transform: translateX(5px);
+}
+
+.terms-section {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.checkbox-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    padding-left: 35px;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.checkbox-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.checkbox-container input:checked~.checkmark {
+    background-color: #2E7D32;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.terms-text {
+    color: #555;
+}
+
+.terms-link {
+    color: #2E7D32;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+.notice-text {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .pre-demande-container {
+        padding: 2rem 1rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .request-card {
+        width: 100%;
+    }
+}
+
+.swal2-popup {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.swal2-title {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.swal2-icon.swal2-question {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.swal2-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.swal2-confirm {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    margin-right: 0.5rem;
+}
+
+.swal2-confirm:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.swal2-cancel:hover {
+    background-color: #f1f1f1;
+}

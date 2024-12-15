@@ -1,0 +1,510 @@
+:root {
+    --deep-navy: #0A2342;
+    --vibrant-teal: #2CA4A6;
+    --soft-gray: #F5F5F5;
+    --crisp-white: #FFFFFF;
+    --accent-coral: #FF4B4B;
+    --shadow-subtle: rgba(10, 35, 66, 0.1);
+}
+
+/* Styles généraux */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--soft-gray) 0%, #E9ECEF 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 2000px;
+    overflow-x: hidden;
+}
+
+.etat-demande-container {
+    width: 100%;
+    padding: 1rem;
+}
+
+.card {
+    background: var(--crisp-white);
+    border-radius: 24px;
+    box-shadow:
+        0 30px 60px var(--shadow-subtle),
+        0 15px 25px rgba(10, 35, 66, 0.05);
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(2deg) rotateY(-3deg);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        linear-gradient(45deg,
+            transparent 20%,
+            rgba(44, 164, 166, 0.1) 50%,
+            transparent 80%);
+    transform: rotate(-45deg);
+    z-index: 1;
+}
+
+.card:hover {
+    transform:
+        rotateX(0deg) rotateY(0deg) scale(1.02);
+    box-shadow:
+        0 40px 80px var(--shadow-subtle),
+        0 20px 35px rgba(10, 35, 66, 0.08);
+}
+
+.card-header {
+    background: var(--deep-navy);
+    color: var(--crisp-white);
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(135deg,
+            var(--vibrant-teal) 0%,
+            transparent 70%);
+    transform: rotate(-45deg);
+    opacity: 0.2;
+}
+
+.card-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 2;
+}
+
+.card-header p {
+    font-size: 1rem;
+    opacity: 0.8;
+    position: relative;
+    z-index: 2;
+}
+
+.card-body {
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.status-section {
+    grid-column: 1 / -1;
+    background: rgba(44, 164, 166, 0.05);
+    border-left: 6px solid var(--vibrant-teal);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.status-section h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.status-section span {
+    margin-left: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.status-section .success {
+    color: #2ecc71;
+}
+
+.status-section .pending {
+    color: #f39c12;
+}
+
+.status-section .failed {
+    color: var(--accent-coral);
+}
+
+.status-section .police-center-date {
+    display: flex;
+    align-items: center;
+    background: rgba(44, 164, 166, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 4px solid var(--vibrant-teal);
+}
+
+.status-section .police-center-date-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(44, 164, 166, 0.2);
+    border-radius: 12px;
+    margin-right: 1rem;
+}
+
+.status-section .police-center-date-icon svg {
+    stroke: var(--vibrant-teal);
+    width: 24px;
+    height: 24px;
+}
+
+.status-section .police-center-date-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-section .police-center-date-label {
+    font-size: 0.9rem;
+    color: var(--deep-navy);
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+}
+
+.status-section .police-center-date-value {
+    font-weight: 600;
+    color: var(--deep-navy);
+}
+
+.info-section,
+.additional-info-section {
+    background: var(--soft-gray);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.info-section:hover,
+.additional-info-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(10, 35, 66, 0.05);
+}
+
+.info-section h4,
+.additional-info-section h4 {
+    color: var(--deep-navy);
+    border-bottom: 2px solid var(--vibrant-teal);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-section ul,
+.additional-info-section ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.info-section li,
+.additional-info-section li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--crisp-white);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.info-section li:hover,
+.additional-info-section li:hover {
+    background: rgba(44, 164, 166, 0.05);
+}
+
+.card-footer {
+    background: var(--soft-gray);
+    padding: 1.5rem 2.5rem;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loading,
+.error {
+    text-align: center;
+    padding: 2rem;
+}
+
+.spinner {
+    border: 4px solid var(--soft-gray);
+    border-top: 4px solid var(--vibrant-teal);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error p {
+    color: var(--accent-coral);
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        grid-template-columns: 1fr;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Styles spécifiques pour les différents statuts */
+.status-section .pending {
+    color: #f39c12;
+    /* Orange pour En Attente */
+    background-color: rgba(243, 156, 18, 0.1);
+    border-left-color: #f39c12;
+}
+
+.status-section .success {
+    color: #2ecc71;
+    /* Vert pour Approuvée */
+    background-color: rgba(46, 204, 113, 0.1);
+    border-left-color: #2ecc71;
+}
+
+.status-section .rejected {
+    color: var(--accent-coral);
+    /* Rouge corail pour Rejetée */
+    background-color: rgba(255, 75, 75, 0.1);
+    border-left-color: var(--accent-coral);
+}
+
+.status-section .completed {
+    color: #3498db;
+    /* Bleu pour Complétée */
+    background-color: rgba(52, 152, 219, 0.1);
+    border-left-color: #3498db;
+}
+
+.status-section .cancelled {
+    color: #95a5a6;
+    /* Gris pour Annulée */
+    background-color: rgba(149, 165, 166, 0.1);
+    border-left-color: #95a5a6;
+}
+
+.status-section .police-center {
+    color: var(--vibrant-teal);
+    /* Teal pour Aller au centre de police */
+    background-color: rgba(44, 164, 166, 0.1);
+    border-left-color: var(--vibrant-teal);
+}
+
+.status-section .unknown {
+    color: #34495e;
+    /* Gris foncé pour statut inconnu */
+    background-color: rgba(52, 73, 94, 0.1);
+    border-left-color: #34495e;
+}
+
+.status-section .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 1rem;
+}
+
+/* Styles pour la Section APPRUVE */
+.approved-section {
+    grid-column: 1 / -1;
+    background: rgba(46, 204, 113, 0.1);
+    /* Vert léger pour le fond */
+    border-left: 6px solid #2ecc71;
+    /* Vert pour la bordure */
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.approved-message {
+    max-width: 60%;
+}
+
+.approved-message h3 {
+    color: #2ecc71;
+    margin-bottom: 0.5rem;
+}
+
+.approved-message p {
+    color: var(--deep-navy);
+    font-size: 1.1rem;
+}
+
+.approved-animation img {
+    width: 150px;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Styles pour la Section EN_ATTENTE */
+.pending-section {
+    grid-column: 1 / -1;
+    background: rgba(243, 156, 18, 0.1);
+    /* Orange léger pour le fond */
+    border-left: 6px solid #f39c12;
+    /* Orange pour la bordure */
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.pending-message {
+    max-width: 60%;
+}
+
+.pending-message h3 {
+    color: #f39c12;
+    margin-bottom: 0.5rem;
+}
+
+.pending-message p {
+    color: var(--deep-navy);
+    font-size: 1.1rem;
+}
+
+.pending-animation img {
+    width: 150px;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Styles pour la Section REJETER */
+.rejected-section {
+    grid-column: 1 / -1;
+    background: rgba(255, 75, 75, 0.1);
+    /* Rouge léger pour le fond */
+    border-left: 6px solid var(--accent-coral);
+    /* Rouge corail pour la bordure */
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.rejected-message {
+    max-width: 60%;
+}
+
+.rejected-message h3 {
+    color: var(--accent-coral);
+    margin-bottom: 0.5rem;
+}
+
+.rejected-message p {
+    color: var(--deep-navy);
+    font-size: 1.1rem;
+}
+
+.rejected-animation img {
+    width: 150px;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Animation pour faire flotter les images */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Animation de fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 768px) {
+
+    .approved-section,
+    .pending-section,
+    .rejected-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .approved-message,
+    .pending-message,
+    .rejected-message {
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .approved-animation img,
+    .pending-animation img,
+    .rejected-animation img {
+        width: 100px;
+    }
+}

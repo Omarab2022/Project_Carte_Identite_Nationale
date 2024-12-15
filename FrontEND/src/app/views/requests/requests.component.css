@@ -1,0 +1,268 @@
+:root {
+    --primary: #3a6ea5;
+    --secondary: #004e98;
+    --accent: #ff6b6b;
+    --background: #f8f9fa;
+    --card-bg: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--soft-gray) 0%, #E9ECEF 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 2000px;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    padding: 24px;
+    background: var(--background);
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 16px;
+    /* Réduit le padding pour mieux ajuster le contenu */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    /* Ajouté pour Flexbox */
+    align-items: center;
+    /* Alignement vertical centré */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.text-content {
+    flex: 1;
+    /* Prend tout l'espace disponible */
+}
+
+.text-content h3 {
+    margin-bottom: 8px;
+    color: var(--secondary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.text-content p {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.image-content img {
+    width: 60px;
+    /* Ajustez la taille selon vos besoins */
+    height: 60px;
+    object-fit: contain;
+    margin-left: 16px;
+    /* Espacement entre le texte et l'image */
+}
+
+.requests-table {
+    padding: 24px;
+    background: var(--background);
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--card-bg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+th {
+    background: var(--primary);
+    color: rgb(213, 156, 0);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 16px;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #444;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: rgba(58, 110, 165, 0.05);
+}
+
+select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    color: #444;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+select:hover,
+select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .requests-table {
+        overflow-x: auto;
+    }
+
+    td,
+    th {
+        padding: 12px;
+    }
+}
+
+/* Exemple d'ajustement des colonnes */
+.requests-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.requests-table th,
+.requests-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.requests-table th {
+    background-color: var(--soft-gray);
+    font-weight: bold;
+}
+
+.requests-table tr:hover {
+    background-color: rgba(44, 164, 166, 0.05);
+}
+
+button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:first-of-type {
+    background-color: #3498db;
+    /* Bleu pour Voir */
+    color: #fff;
+}
+
+button:last-of-type {
+    background-color: #e67e22;
+    /* Orange pour Modifier */
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .requests-table table,
+    .requests-table thead,
+    .requests-table tbody,
+    .requests-table th,
+    .requests-table td,
+    .requests-table tr {
+        display: block;
+    }
+
+    .requests-table tr {
+        margin-bottom: 1rem;
+    }
+
+    .requests-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .requests-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: 45%;
+        padding-right: 1rem;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+
+
+}
+
+/* src/app/components/requests/requests.component.css */
+
+/* Styles supplémentaires pour SweetAlert2 */
+.swal2-popup {
+    font-size: 1rem !important;
+}
+
+.swal2-title {
+    color: var(--secondary);
+}
+
+.swal2-html-container {
+    color: #444;
+}
+
+.swal2-confirm {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}

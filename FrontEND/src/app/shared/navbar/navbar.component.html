@@ -1,0 +1,29 @@
+<!-- DESKTOP -->
+<mat-toolbar class="navbar" [class.header_change]="header_variable">
+
+  <div class="d-md-none">
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <a routerLink="/">
+    <img class="logo" src="../../../assets/img/royaume-du-maroc-kingdom-of-morocco-logo-png_seeklogo-309860.png"
+      alt="logo">
+  </a>
+
+  <div class="d-none d-md-block">
+    <a class="nav-item" routerLink="/home" routerLinkActive="active-link">Home</a>
+    <a class="nav-item" routerLink="/features" routerLinkActive="active-link">A propos de la CINE </a>
+    <a class="nav-item" routerLink="/pricing" routerLinkActive="active-link">Procédurs</a>
+    <a class="nav-item" routerLink="/pre-demande" routerLinkActive="active-link">Services</a>
+    <a class="nav-item" routerLink="/contact" routerLinkActive="active-link">FAQ</a>
+  </div>
+
+  <div div class="d-none d-md-block">
+    <!-- Replace this line in navbar.component.html -->
+    <a class="nav-item" routerLink="/login" routerLinkActive="active-link">Admin</a>
+
+  </div>
+
+</mat-toolbar>

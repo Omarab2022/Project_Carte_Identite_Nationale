@@ -1,0 +1,271 @@
+<div class="container" id="citoyenForm">
+    <div class="cnie-form-header">
+        <h1>Pré-demande de première délivrance de la CNIE</h1>
+    </div>
+    <form [formGroup]="citoyenForm" (ngSubmit)="onSubmit()" class="cnie-form">
+        <div class="form-section">
+            <h2 class="section-title">Informations Personnelles</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="nom">Nom<span class="required">*</span></label>
+                    <input type="text" id="nom" name="nom" required formControlName="nom">
+                    <span class="arabic-label">الإسم العائلي</span>
+                </div>
+                <div class="form-field">
+                    <label for="prenom">Prénom<span class="required">*</span></label>
+                    <input type="text" id="prenom" name="prenom" required formControlName="prenom">
+                    <span class="arabic-label">الإسم الشخصي</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="dateNaissanceJj">Date de naissance<span class="required">*</span></label>
+                    <div class="date-field">
+                        <input type="number" id="dateNaissanceJj" name="dateNaissanceJj" min="1" max="31"
+                            placeholder="JJ" required formControlName="dateNaissanceJj">
+                        <input type="number" id="dateNaissanceMm" name="dateNaissanceMm" min="1" max="12"
+                            placeholder="MM" required formControlName="dateNaissanceMm">
+                        <input type="number" id="dateNaissanceAaaa" name="dateNaissanceAaaa" placeholder="AAAA" required
+                            formControlName="dateNaissanceAaaa">
+                    </div>
+                    <span class="date-note">Le jour et le mois sont obligatoires si vous en disposez.</span>
+                </div>
+                <div class="form-field">
+                    <label for="sexe">Sexe<span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" id="sexeFeminin" name="sexe" value="FEMININ" required
+                                formControlName="sexe">
+                            Féminin
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="sexeMasculin" name="sexe" value="MASCULIN" required
+                                formControlName="sexe">
+                            Masculin
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="paysNaissance">Pays de naissance<span class="required">*</span></label>
+                    <select id="paysNaissance" name="paysNaissance" required formControlName="paysNaissance">
+                        <option value="">Sélectionnez un pays</option>
+                        <option value="Maroc">Maroc</option>
+                        <option value="France">France</option>
+                        <option value="Espagne">Espagne</option>
+                        <option value="États-Unis">États-Unis</option>
+                        <!-- Ajouter d'autres pays ici -->
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="provinceNaissance">Province ou ville de naissance<span class="required">*</span></label>
+                    <input type="text" id="provinceNaissance" name="provinceNaissance" required
+                        formControlName="provinceNaissance">
+                    <span class="arabic-label">مكان الإزدياد</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="communeNaissance">Commune de naissance<span class="required">*</span></label>
+                    <input type="text" id="communeNaissance" name="communeNaissance" required
+                        formControlName="communeNaissance">
+                </div>
+                <div class="form-field">
+                    <label for="lieuNaissance">Lieu de naissance</label>
+                    <input type="text" id="lieuNaissance" name="lieuNaissance" formControlName="lieuNaissance">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="nationaliteOrigine">Nationalité d'origine<span class="required">*</span></label>
+                    <select id="nationaliteOrigine" name="nationaliteOrigine" required
+                        formControlName="nationaliteOrigine">
+                        <option value="">Sélectionnez une nationalité</option>
+                        <option value="Marocaine">Marocaine</option>
+                        <option value="Française">Française</option>
+                        <option value="Espagnole">Espagnole</option>
+                        <option value="Américaine">Américaine</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="typeProfession">Type de profession<span class="required">*</span></label>
+                    <select id="typeProfession" name="typeProfession" required formControlName="typeProfession">
+                        <option value="">Sélectionnez un type de profession</option>
+                        <option value="Médecin">Médecin</option>
+                        <option value="Ingénieur">Ingénieur</option>
+                        <option value="Enseignant">Enseignant</option>
+                        <option value="Artisan">Artisan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="profession">Profession<span class="required">*</span></label>
+                    <input type="text" id="profession" name="profession" required formControlName="profession">
+                    <span class="arabic-label">المهنة</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">État Civil</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="etatCivilNumero">Etat civil N°<span class="required">*</span></label>
+                    <input type="text" id="etatCivilNumero" name="etatCivilNumero" required
+                        formControlName="etatCivilNumero">
+                    <span class="arabic-label">بالعربية</span>
+                </div>
+                <div class="form-field">
+                    <label for="etatCivilAnnee">Année État Civil<span class="required">*</span></label>
+                    <input type="number" id="etatCivilAnnee" name="etatCivilAnnee" required
+                        formControlName="etatCivilAnnee">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="situationFamille">Situation de famille<span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" id="situationCelibataire" name="situationFamille" value="CELIBATAIRE"
+                                required formControlName="situationFamille">
+                            Célibataire
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="situationMarie" name="situationFamille" value="MARIE" required
+                                formControlName="situationFamille">
+                            Marié(e)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="situationDivorce" name="situationFamille" value="DIVORCE" required
+                                formControlName="situationFamille">
+                            Divorcé(e)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="situationVeuf" name="situationFamille" value="VEUF" required
+                                formControlName="situationFamille">
+                            Veuf, Veuve
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">Lieu de Résidence</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="paysResidence">Pays de résidence<span class="required">*</span></label>
+                    <select id="paysResidence" name="paysResidence" required formControlName="paysResidence">
+                        <option value="">Sélectionnez un pays</option>
+                        <option value="Maroc">Maroc</option>
+                        <option value="France">France</option>
+                        <option value="Espagne">Espagne</option>
+                        <option value="États-Unis">États-Unis</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="provinceResidence">Province ou ville de résidence<span class="required">*</span></label>
+                    <input type="text" id="provinceResidence" name="provinceResidence" required
+                        formControlName="provinceResidence">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="communeResidence">Commune de résidence<span class="required">*</span></label>
+                    <input type="text" id="communeResidence" name="communeResidence" required
+                        formControlName="communeResidence">
+                </div>
+                <div class="form-field">
+                    <label for="adresse">Adresse<span class="required">*</span></label>
+                    <input type="text" id="adresse" name="adresse" required formControlName="adresse">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">Filiation</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomPere">Prénom du père<span class="required">*</span></label>
+                    <input type="text" id="prenomPere" name="prenomPere" required formControlName="prenomPere">
+                    <span class="arabic-label">الإسم الشخصي للأب</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomPere">Nom du père</label>
+                    <input type="text" id="nomPere" name="nomPere" formControlName="nomPere">
+                    <span class="arabic-label">الإسم العائلي للأب</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomMere">Prénom de la mère<span class="required">*</span></label>
+                    <input type="text" id="prenomMere" name="prenomMere" required formControlName="prenomMere">
+                    <span class="arabic-label">الإسم الشخصي للأم</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomMere">Nom de la mère</label>
+                    <input type="text" id="nomMere" name="nomMere" formControlName="nomMere">
+                    <span class="arabic-label">الإسم العائلي للأم</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomGrandPerePaternel">Prénom du grand père paternel<span
+                            class="required">*</span></label>
+                    <input type="text" id="prenomGrandPerePaternel" name="prenomGrandPerePaternel" required
+                        formControlName="prenomGrandPerePaternel">
+                    <span class="arabic-label">الإسم الشخصي للجد من الأب</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomGrandPerePaternel">Nom du grand père paternel</label>
+                    <input type="text" id="nomGrandPerePaternel" name="nomGrandPerePaternel"
+                        formControlName="nomGrandPerePaternel">
+                    <span class="arabic-label">الإسم العائلي للجد من الأب</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="prenomGrandPereMaternel">Prénom du grand père maternel<span
+                            class="required">*</span></label>
+                    <input type="text" id="prenomGrandPereMaternel" name="prenomGrandPereMaternel" required
+                        formControlName="prenomGrandPereMaternel">
+                    <span class="arabic-label">الإسم الشخصي للجد من الأم</span>
+                </div>
+                <div class="form-field">
+                    <label for="nomGrandPereMaternel">Nom du grand père maternel</label>
+                    <input type="text" id="nomGrandPereMaternel" name="nomGrandPereMaternel"
+                        formControlName="nomGrandPereMaternel">
+                    <span class="arabic-label">الإسم العائلي للجد من الأم</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">Informations Additionnelles</h2>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email"
+                        placeholder="Pour être informé de la disponibilité de votre carte" formControlName="email">
+                </div>
+                <div class="form-field">
+                    <label for="telephone">Téléphone</label>
+                    <input type="tel" id="telephone" name="telephone"
+                        placeholder="Pour être informé de la disponibilité de votre carte" formControlName="telephone">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="urgenceContact">Contacts en cas d'urgence</label>
+                    <input type="text" id="urgenceContact" name="urgenceContact" formControlName="urgenceContact">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">SUIVANT</button>
+        </div>
+    </form>
+</div>
